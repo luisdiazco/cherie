@@ -4,7 +4,7 @@ from app.blueprints import web, user
 
 app = Flask(__name__)
 
-app.register_blueprint(web.bp)
+app.register_blueprint(web.home_bp)
 app.register_blueprint(user.bp)
 
 
