@@ -4,3 +4,27 @@
     height: auto;
     /* Keeps the aspect ratio of the image. */
 }
+
+#signInModal .modal-dialog {
+    width: 400px;
+    /* or whatever width you want */
+    /* height: 400px; optionally set a fixed height */
+}
+
+.modal.show {
+    display: flex !important;
+    /* Use !important to ensure it overrides Bootstrap's styles */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-backdrop {
+    opacity: 0.1 !important;
+
+}
+
+.modal-backdrop.show {
+    opacity: 0.1 !important;
+    pointer-events: none;
+    /* This ensures the backdrop doesn't block clicks */
+}
