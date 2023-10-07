@@ -1,12 +1,16 @@
-# app.py
-from flask import Flask, request
-from app.blueprints import web, user
-
-app = Flask(__name__)
-
-app.register_blueprint(web.home_bp)
-app.register_blueprint(user.bp)
+from flask import Flask
+import os
 
 
-# if __name__ == "__main__":
-#     app.run()
+def create_app():
+    app = Flask(__name__)
+
+    # Load the configuration from the file
+    app.config.from_pyfile("config.py")
+
+    # Register blueprints
+    from .blueprints import auth, web
+    app.register_blueprint(auth.auth_bp)
+    app.register_blueprint(web.home_bp)
+
+    return app
