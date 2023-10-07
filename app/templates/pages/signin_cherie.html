@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Cherie</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signin.css') }}">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <!-- Company Logo (Clickable) -->
+        <div class="text-center" id="company-logo">
+            <a href="{{ url_for('web.home') }}">
+                <img src="{{ url_for('static', filename='img/cherie-logo.png') }}" alt="Cherie Logo" class="mb-4">
+            </a>
+        </div>
+        <!-- Sign In Box -->
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Sign In</h5>
+                        <form>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <!-- Add custom CSS class to both buttons for equal sizing -->
+                            <button type="submit" class="btn btn-primary btn-block signin-page-btn">Sign In</button>
+                        </form>
+                        <hr>
+                        <p class="text-center">
+                            New to Cherie?
+                            <!-- Add custom CSS class to the "Create your Cherie account" button -->
+                            <a href="#" class="btn btn-secondary signin-page-btn">Create your Cherie account</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Footer -->
+        <footer class="mt-5 text-center">
+            <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Customer Service</a>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript to handle clicking on the company logo -->
+    <script>
+        document.getElementById("company-logo").addEventListener("click", function () {
+            // Redirect to the home page
+            window.location.href = "{{ url_for('web.home') }}";
+        });
+    </script>
+</body>
+
+</html>

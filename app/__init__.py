@@ -1,5 +1,6 @@
 from flask import Flask
-import os
+from .blueprints.auth import auth_bp
+from .blueprints.web import home_bp
 
 
 def create_app():
@@ -9,8 +10,7 @@ def create_app():
     app.config.from_pyfile("config.py")
 
     # Register blueprints
-    from .blueprints import auth, web
-    app.register_blueprint(auth.auth_bp)
-    app.register_blueprint(web.home_bp)
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(home_bp)
 
     return app

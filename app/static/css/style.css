@@ -1,0 +1,7 @@
+/* ---------------- Styling for navbar ---------------- */
+.navbar-brand img {
+    width: 110px !important;
+    /* Set the width of the logo. Adjust as needed. */
+    height: auto;
+    /* Keeps the aspect ratio of the image. */
+}
