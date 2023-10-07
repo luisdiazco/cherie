@@ -1,9 +1,10 @@
 <!-- Sign In/Register Modal -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/modal.css') }}">
 
 <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <!-- Use Bootstrap's responsive classes -->
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="signInModalLabel">Sign In/Register</h5>
@@ -24,7 +25,9 @@
                 <hr>
 
                 <!-- Create your Cherie account -->
-                <button class="btn btn-secondary btn-block">Create your Cherie account</button>
+                <a href="{{url_for('auth.register')}}">
+                    <button class="btn btn-secondary btn-block">Create your Cherie account</button>
+                </a>
             </div>
         </div>
     </div>

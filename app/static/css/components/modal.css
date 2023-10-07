@@ -13,12 +13,12 @@
 }
 
 .modal-backdrop {
-    opacity: 0.1 !important;
+    opacity: 0.05 !important;
 
 }
 
 .modal-backdrop.show {
-    opacity: 0.1 !important;
+    opacity: 0.05 !important;
     pointer-events: none;
     /* This ensures the backdrop doesn't block clicks */
 }

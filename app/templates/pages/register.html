@@ -4,57 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - Cherie</title>
+    <title>Create Account - Cherie</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/signin-cherie.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 </head>
 
 <body>
     <div class="container mt-5">
-        <!-- Company Logo (Clickable) -->
-        <div class="text-center" id="company-logo">
-            <a href="{{ url_for('web.home') }}">
+        <!-- Company Logo -->
+        <div class="text-center">
+            <a href="{{url_for('web.home')}}">
                 <img src="{{ url_for('static', filename='img/cherie-logo-alt.png') }}" alt="Cherie Logo" class="mb-4">
             </a>
         </div>
-        <!-- Sign In Box -->
+
+
+        <!-- Registration Box -->
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+                <div id="register-box" class="card">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Sign In</h5>
+                        <h5 class="card-title text-center">Create Account</h5>
                         <form>
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" id="username" name="username" required>
                             </div>
                             <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
+                                <small class="form-text text-muted">Password must be at least 6 characters long.</small>
                             </div>
-                            <!-- Add custom CSS class to both buttons for equal sizing -->
-                            <button type="submit" class="btn btn-primary btn-block signin-page-btn">Sign In</button>
+                            <div class="form-group">
+                                <label for="repassword">Re-enter Password</label>
+                                <input type="password" class="form-control" id="repassword" name="repassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block signin-page-btn">Create your Cherie
+                                account</button>
                         </form>
-                        <div class="divider">
-                            <span class="divider-line"></span>
-                            <span class="divider-text">New to Cherie?</span>
-                            <span class="divider-line"></span>
-                        </div>
+                        <p class="text-muted text-center mt-3">
+                            Registering means you agree to the Cherie <a href="#">Terms of Use</a> and <a
+                                href="#">Privacy Policy</a>.
+                        </p>
+                        <hr>
                         <p class="text-center">
-                            <a href="{{ url_for('auth.register') }}" class="btn btn-secondary signin-page-btn">Create
-                                your Cherie account</a>
+                            Already have an account? <a href="{{url_for('auth.signin_cherie')}}">Sign in</a>
                         </p>
                     </div>
                 </div>
-
             </div>
         </div>
-
-
 
         <!-- Footer -->
         <footer class="mt-5 text-center">
@@ -66,14 +73,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- JavaScript to handle clicking on the company logo -->
-    <script>
-        document.getElementById("company-logo").addEventListener("click", function () {
-            // Redirect to the home page
-            window.location.href = "{{ url_for('web.home') }}";
-        });
-    </script>
 </body>
 
 </html>

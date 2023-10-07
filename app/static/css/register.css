@@ -1,0 +1,9 @@
+/* Custom CSS for the registration page */
+#register-box {
+
+    max-width: 100%;
+    margin: 1rem auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
