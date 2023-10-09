@@ -1,0 +1,66 @@
+body {
+    background: url(../img/home/sneaker1.jpg) no-repeat;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.navbar {
+    padding-left: 100px;
+    /* Adjust the left padding as needed */
+    padding-right: 20px;
+    background-color: transparent !important;
+    /* Important to override Bootstrap styles */
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Center the navbar items horizontally */
+.navbar-nav {
+    margin: 0 auto;
+    /* Center align the items */
+    display: flex;
+    justify-content: left;
+    /* Center the items horizontally */
+    align-items: center;
+    padding-left: 0;
+    /* Center the items vertically if needed */
+}
+
+.navbar-nav .nav-item {
+    margin-right: 15px;
+    /* Add spacing between the links */
+}
+
+/* Center the cart and sign-in/register buttons */
+.navbar-nav.ml-2 {
+    margin-left: auto;
+    /* Move the buttons to the right */
+}
+
+/* Center the logo */
+.navbar-brand {
+    margin: 0;
+    /* Reset margin to center the logo */
+}
+
+/* Change navbar text color to white */
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+    transition: color 0.3s;
+    /* Smooth transition for color change */
+}
+
+/* Change navbar text color to indigo blue on hover */
+.navbar-light .navbar-nav .nav-link:hover {
+    color: rgb(97, 147, 255);
+}
+
+.navbar-light .navbar-nav .nav-item.active .nav-link {
+    color: rgb(97, 147, 255);
+}
+
+/* Change navbar background color */
+.navbar {
+    background-color: transparent;
+    /* Change the background color as needed */
+}
