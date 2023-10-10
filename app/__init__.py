@@ -1,7 +1,7 @@
 from flask import Flask
 import os
 
-from .blueprints.auth import login_bp, auth_bp
+from .blueprints.auth import auth_bp
 from .blueprints.web import home_bp
 
 
@@ -13,8 +13,7 @@ def create_app():
     app.config.from_pyfile("config.py")
 
     # Register blueprints
-    app.register_blueprint(login_bp)
-    app.register_blueprint(auth_bp)
+    app.register_blueprint(auth_bp, url_prefix='')
     app.register_blueprint(home_bp)
 
     return app

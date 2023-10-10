@@ -16,10 +16,9 @@ dynamodb = boto3.resource('dynamodb',
 
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
-login_bp = Blueprint("login", __name__)
 
 
-@login_bp.route('/')
+@auth_bp.route('/')
 def login():
     return render_template("pages/signin_cherie.html")
 
@@ -47,7 +46,7 @@ def register():
 
                 flash(
                     'Email already registered. Please use another email or login.', 'error')
-                return redirect(url_for('auth.signin_cherie'))
+                return redirect(url_for('auth.login'))
 
             # @TODO: set up hashing
             response = table.put_item(
@@ -60,7 +59,7 @@ def register():
             )
             print("PRINTING RESPONSE: ", response)
             flash('Registration Complete. Please login to your account!', 'success')
-            # assuming you have a 'login' route
+
             return redirect(url_for('auth.login'))
 
         except ClientError as e:
@@ -78,16 +77,23 @@ def register():
 @auth_bp.route('/auth', methods=['POST'])
 def authentication():
     if request.method == 'POST':
-        email = request.form['email']
+        # This could be email or username
+        identifier = request.form['identifier']
         password = request.form['password']
 
         table = dynamodb.Table('users')
-        response = table.query(
-            KeyConditionExpression=Key('email').eq(email)
+
+        # Scan for email or username
+        response = table.scan(
+            FilterExpression=(Attr('email').eq(identifier)) | (
+                Attr('username').eq(identifier))
         )
 
-        items = response['Items']
-        username = items[0]['username']
-        if password == items[0]['password']:
-            return render_template("home.tml", username=username)
+        if response['Items']:
+            user = response['Items'][0]
+            if user['password'] == password:
+                return render_template("home.html", username=user['username'])
+
+        flash('Invalid login credentials. Please try again.', 'error')
+
     return render_template('pages/signin_cherie.html')
