@@ -2,9 +2,12 @@ from boto3.dynamodb.conditions import Key, Attr
 from uuid import uuid4
 from flask import Blueprint, flash, render_template, redirect, url_for, request
 from botocore.exceptions import ClientError
+from boto3.dynamodb.types import TypeDeserializer
 import app.key_config as keys
 import boto3
 import logging
+import bcrypt
+import base64
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -25,56 +28,57 @@ def login():
 
 @auth_bp.route('/register', methods=["GET", "POST"])
 def register():
-    print("HELLO")
     if request.method == 'POST':
-        print("IN POST METHOD")
-        user_id = str(uuid4())
         username = request.form['username']
         email = request.form['email']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
         password = request.form['password']
+
+        if not isinstance(password, str):
+            password = str(password)
 
         table = dynamodb.Table('users')
 
-        try:
+        # check if username already exists
+        username_response = table.query(
+            KeyConditionExpression=Key('username').eq(username)
+        )
 
-            # Check if user with this email already exists
-            response = table.query(
-                IndexName='EmailIndex',
-                KeyConditionExpression=Key('email').eq(email)
-            )
-            if response.get('Items'):
+        # check if email already exists
+        email_response = table.scan(
+            FilterExpression=Attr('email').eq(email)
+        )
 
-                flash(
-                    'Email already registered. Please use another email or login.', 'error')
-                return redirect(url_for('auth.login'))
+        if username_response.get('Items'):
+            flash('Username already taken. Please choose another username.', 'error')
+            return redirect(url_for('auth.register'))
 
-            # @TODO: set up hashing
-            response = table.put_item(
-                Item={
-                    'user_id': user_id,
-                    'username': username,
-                    'email': email,
-                    'password': password
-                }
-            )
-            print("PRINTING RESPONSE: ", response)
-            flash('Registration Complete. Please login to your account!', 'success')
+        if email_response.get('Items'):
+            flash('Email already registered. Please use another email or login.', 'error')
+            return redirect(url_for('auth.register'))
 
-            return redirect(url_for('auth.login'))
+        # Hash the password using Flask-Bcrypt
+        hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-        except ClientError as e:
-            flash(
-                f"An error occurred: {e.response['Error']['Message']}", 'error')
-            return render_template("pages/register.html")
+        # Add the new user to the table
+        response = table.put_item(
+            Item={
+                'username': username,
+                'email': email,
+                'first_name': first_name,
+                'last_name': last_name,
+                'password': hashed_pw
+            }
+        )
 
-        except Exception as e:
-            flash(f"An unexpected error occurred: {str(e)}", 'error')
-            return render_template("pages/register.html")
+        flash('Registration Complete. Please login to your account!', 'success')
+        return redirect(url_for('auth.login'))
 
     return render_template("pages/register.html")
 
 
-@auth_bp.route('/home', methods=['POST'])
+@auth_bp.route('/auth', methods=['POST'])
 def authentication():
     if request.method == 'POST':
         # This could be email or username
@@ -83,7 +87,7 @@ def authentication():
 
         table = dynamodb.Table('users')
 
-        # Scan for email or username
+        # Use scan operation to filter by email or username
         response = table.scan(
             FilterExpression=(Attr('email').eq(identifier)) | (
                 Attr('username').eq(identifier))
@@ -91,8 +95,15 @@ def authentication():
 
         if response['Items']:
             user = response['Items'][0]
-            if user['password'] == password:
-                return render_template("pages/home.html", username=user['username'])
+
+            # Decode the password attribute from Binary to bytes
+            stored_password_bytes = user['password'].value
+            stored_password = stored_password_bytes.decode('utf-8')
+
+            # Verify the password
+            if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
+                # Redirect to the user's home page with their username
+                return redirect(url_for('web.home', username=user['username']))
 
         flash('Invalid login credentials. Please try again.', 'error')
 

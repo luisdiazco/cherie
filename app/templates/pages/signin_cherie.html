@@ -25,7 +25,7 @@
     <div class="container mt-5">
         <!-- Company Logo (Clickable) -->
         <div class="text-center" id="company-logo">
-            <a href="{{ url_for('web.home') }}">
+            <a href="{{ url_for('auth.login') }}">
                 <img src="{{ url_for('static', filename='img/cherie-logo-alt.png') }}" alt="Cherie Logo" class="mb-4">
             </a>
         </div>
@@ -77,13 +77,6 @@
     <!-- Handle flash message -->
     <script src="{{ url_for('static', filename='js/flashMessageEffects.js') }}"></script>
 
-    <!-- JavaScript to handle clicking on the company logo -->
-    <script>
-        document.getElementById("company-logo").addEventListener("click", function () {
-            // Redirect to the home page
-            window.location.href = "{{ url_for('web.home') }}";
-        });
-    </script>
 </body>
 
 </html>

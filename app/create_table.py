@@ -14,42 +14,20 @@ table = dynamodb.create_table(
     TableName='users',
     KeySchema=[
         {
-            'AttributeName': 'user_id',
+              'AttributeName': 'username',  # Use 'username' as the primary key
             'KeyType': 'HASH'  # Partition key
         }
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'user_id',
-            'AttributeType': 'S'  # 'S' denotes a String. This will be a UUID.
-        },
-        {
-            'AttributeName': 'email',
-            'AttributeType': 'S'
+            'AttributeName': 'username',  # Define 'username' as an attribute
+            'AttributeType': 'S'  # 'S' denotes a String data type
         }
     ],
     ProvisionedThroughput={
         'ReadCapacityUnits': 5,
         'WriteCapacityUnits': 5
-    },
-    GlobalSecondaryIndexes=[
-        {
-            'IndexName': 'EmailIndex',
-            'KeySchema': [
-                {
-                    'AttributeName': 'email',
-                    'KeyType': 'HASH'
-                }
-            ],
-            'Projection': {
-                'ProjectionType': 'ALL'
-            },
-            'ProvisionedThroughput': {
-                'ReadCapacityUnits': 5,
-                'WriteCapacityUnits': 5,
-            }
-        }
-    ]
+    }
 )
 
 # Wait until table exists
