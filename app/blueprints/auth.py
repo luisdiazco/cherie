@@ -15,7 +15,7 @@ dynamodb = boto3.resource('dynamodb',
                           )
 
 
-auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
+auth_bp = Blueprint("auth", __name__)
 
 
 @auth_bp.route('/')
@@ -74,11 +74,11 @@ def register():
     return render_template("pages/register.html")
 
 
-@auth_bp.route('/auth', methods=['POST'])
+@auth_bp.route('/home', methods=['POST'])
 def authentication():
     if request.method == 'POST':
         # This could be email or username
-        identifier = request.form['identifier']
+        identifier = request.form['login']
         password = request.form['password']
 
         table = dynamodb.Table('users')
@@ -92,7 +92,7 @@ def authentication():
         if response['Items']:
             user = response['Items'][0]
             if user['password'] == password:
-                return render_template("home.html", username=user['username'])
+                return render_template("pages/home.html", username=user['username'])
 
         flash('Invalid login credentials. Please try again.', 'error')
 
