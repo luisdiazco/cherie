@@ -1,10 +1,15 @@
 from flask import Flask
+import os
+
 from .blueprints.auth import auth_bp
 from .blueprints.web import home_bp
 
+app = Flask(__name__)
+
+app.secret_key = os.environ.get('FLASK_SECRET_KEY')
+
 
 def create_app():
-    app = Flask(__name__)
 
     # Load the configuration from the file
     app.config.from_pyfile("config.py")
