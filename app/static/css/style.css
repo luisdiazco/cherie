@@ -108,3 +108,20 @@
     opacity: 0.05 !important;
     pointer-events: none;
 }
+
+/* ---------------- Styling flash message ---------------- */
+.flash-message {
+    opacity: 0;
+    transition: opacity 0.5s;
+    /* Adjust as desired for fade-in speed */
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e74c3c;
+    /* Example color. Change as desired */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
+}

@@ -16,10 +16,11 @@ dynamodb = boto3.resource('dynamodb',
 
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
+login_bp = Blueprint("login", __name__)
 
 
-@auth_bp.route('/signin-cherie')
-def signin_cherie():
+@login_bp.route('/')
+def login():
     return render_template("pages/signin_cherie.html")
 
 
@@ -43,10 +44,10 @@ def register():
                 KeyConditionExpression=Key('email').eq(email)
             )
             if response.get('Items'):
-                print('ITEM ALREADY IN TABLE')
+
                 flash(
                     'Email already registered. Please use another email or login.', 'error')
-                return redirect(url_for('signin_cherie'))
+                return redirect(url_for('auth.signin_cherie'))
 
             # @TODO: set up hashing
             response = table.put_item(
@@ -60,7 +61,7 @@ def register():
             print("PRINTING RESPONSE: ", response)
             flash('Registration Complete. Please login to your account!', 'success')
             # assuming you have a 'login' route
-            return redirect(url_for('signin_cherie'))
+            return redirect(url_for('auth.login'))
 
         except ClientError as e:
             flash(
@@ -72,3 +73,21 @@ def register():
             return render_template("pages/register.html")
 
     return render_template("pages/register.html")
+
+
+@auth_bp.route('/auth', methods=['POST'])
+def authentication():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        table = dynamodb.Table('users')
+        response = table.query(
+            KeyConditionExpression=Key('email').eq(email)
+        )
+
+        items = response['Items']
+        username = items[0]['username']
+        if password == items[0]['password']:
+            return render_template("home.tml", username=username)
+    return render_template('pages/signin_cherie.html')
