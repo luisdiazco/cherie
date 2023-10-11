@@ -1,13 +1,235 @@
+<!-- templates/pages/listings.html -->
+
 {% extends "layout/index.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Your Listings{% endblock %}
 
 {% block content %}
-<div class="hero">
-    <h1>Welcome, {{ username }}, these are your lisitings</h1>
+<div class="container mt-5">
+    <!-- Company Logo (Clickable) -->
+    <div class="text-center" id="company-logo">
+        <a href="{{ url_for('auth.login') }}">
+            <img src="{{ url_for('static', filename='img/cherie-logo-alt.png') }}" alt="Cherie Logo" class="mb-4">
+        </a>
+    </div>
 
+    <!-- Pagination Controls -->
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <ul class="pagination" id="pagination">
+                <!-- Pagination links will be added here using JavaScript -->
+            </ul>
+        </div>
+    </div>
+    <!-- Listings Table -->
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Condition</th>
+                        <th>Size</th>
+                        <th>Free Shipping</th>
+                        <th>Price (US$)</th>
+                        <th>Action</th> <!-- Add a new column for the action button -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.category }}</td>
+                        <td>{{ product.condition }}</td>
+                        <td>{{ product.size }}</td>
+                        <td>{{ 'Yes' if product.free_shipping else 'No' }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>
+                            <!-- Action button to open the modal -->
+                            <button class="btn btn-primary" data-toggle="modal"
+                                data-target="#editModal{{ product.product_id }}">Edit</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- Create Listing Button -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6 text-center">
+            <a href="{{ url_for('web.create_listing') }}" class="btn btn-primary btn-lg">Create Listing</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 text-center">
+        <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Customer Service</a>
+    </footer>
 </div>
 
+<!-- Modal for editing listing -->
+{% for product in products %}
+<div class="modal fade editModal" id="editModal{{ product.product_id }}" tabindex="-1" role="dialog"
+    aria-labelledby="editModalLabel{{ product.product_id }}" aria-hidden="true">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel{{ product.product_id }}">Edit Listing</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ url_for('web.update_listing', product_id=product.product_id) }}" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="edit-description">Description</label>
+                        <textarea class="form-control" id="edit-description" name="edit-description"
+                            rows="5">{{ product.description }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-category">Category</label>
+                        <select class="form-control" id="edit-category" name="edit-category">
+                            <option value="tops" {% if product.category=='tops' %}selected{% endif %}>Tops</option>
+                            <option value="bottoms" {% if product.category=='bottoms' %}selected{% endif %}>Bottoms
+                            </option>
+                            <option value="coats_and_jackets" {% if product.category=='coats_and_jackets' %}selected{%
+                                endif %}>Coats and Jackets</option>
+                            <option value="jumpsuits_and_rompers" {% if product.category=='jumpsuits_and_rompers'
+                                %}selected{% endif %}>Jumpsuits and Rompers</option>
+                            <option value="suits" {% if product.category=='suits' %}selected{% endif %}>Suits</option>
+                            <option value="footwear" {% if product.category=='footwear' %}selected{% endif %}>Footwear
+                            </option>
+                            <option value="accessories" {% if product.category=='accessories' %}selected{% endif %}>
+                                Accessories</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-condition">Condition:</label>
+                        <select class="form-control" id="edit-condition" name="edit-condition">
+                            <option value="Brand New" {% if product.condition=='Brand New' %}selected{% endif %}>Brand
+                                New</option>
+                            <option value="Like New" {% if product.condition=='Like New' %}selected{% endif %}>Like New
+                            </option>
+                            <option value="Used - Excellent" {% if product.condition=='Used - Excellent' %}selected{%
+                                endif %}>Used - Excellent</option>
+                            <option value="Used - Good" {% if product.condition=='Used - Good' %}selected{% endif %}>
+                                Used - Good</option>
+                            <option value="Used - Fair" {% if product.condition=='Used - Fair' %}selected{% endif %}>
+                                Used - Fair</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-size">Size</label>
+                        <select class="form-control" id="edit-size" name="edit-size">
+                            <option value="XXL" {% if product.size=='XXL' %}selected{% endif %}>XXL</option>
+                            <option value="XL" {% if product.size=='XL' %}selected{% endif %}>XL</option>
+                            <option value="L" {% if product.size=='L' %}selected{% endif %}>L</option>
+                            <option value="M" {% if product.size=='M' %}selected{% endif %}>M</option>
+                            <option value="S" {% if product.size=='S' %}selected{% endif %}>S</option>
+                            <option value="XS" {% if product.size=='XS' %}selected{% endif %}>XS</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-free-shipping" class="d-flex align-items-center">
+                            Free Shipping
+                            <input type="checkbox" class="ml-2" id="edit-free-shipping" name="edit-free-shipping"
+                                value="true" {% if product.free_shipping %}checked{% endif %}>
+                        </label>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="edit-price">Price (US$):</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="number" class="form-control" id="edit-price" name="edit-price" min="0"
+                                value="{{ product.price }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+<script>
+    $(document).ready(function () {
+        var products = {{ products | tojson | safe
+    }};
+    var itemsPerPage = 10; // Number of items to display per page
+    var currentPage = 1;
+
+    function paginate() {
+        var startIndex = (currentPage - 1) * itemsPerPage;
+        var endIndex = startIndex + itemsPerPage;
+        var paginatedProducts = products.slice(startIndex, endIndex);
+
+        // Clear existing content
+        $("#product-list").empty();
+
+        // Populate the table with paginated products
+        paginatedProducts.forEach(function (product) {
+            $("#product-list").append(`
+            <tr>
+                <td>${product.description}</td>
+                <td>${product.category}</td>
+                <td>${product.condition}</td>
+                <td>${product.size}</td>
+                <td>${product.free_shipping ? 'Yes' : 'No'}</td>
+                <td>${product.price}</td>
+                <td>
+                    <!-- Action button to open the modal -->
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#editModal${product.product_id}">Edit</button>
+                </td>
+            </tr>
+        `);
+        });
+        console.log('current page: ', currentPage);
+        // Log the contents of the 'products' variable
+        console.log(products);
+        // Update pagination controls
+        updatePagination();
+    }
+
+    function updatePagination() {
+        var totalPages = Math.ceil(products.length / itemsPerPage);
+        var pagination = $("#pagination");
+
+        pagination.empty();
+
+        if (totalPages > 1) {
+            for (var i = 1; i <= totalPages; i++) {
+                pagination.append(`
+                            <li class="page-item ${i === currentPage ? 'active' : ''}">
+                                <a class="page-link" href="#" data-page="${i}">${i}</a>
+                            </li>
+                        `);
+            }
+        }
+    }
+
+    // Initial pagination
+    paginate();
+
+    // Handle page click
+    $("#pagination").on("click", "a.page-link", function (event) {
+        event.preventDefault();
+        currentPage = parseInt($(this).data("page"));
+        paginate();
+    });
+});
+</script>
 
 {% endblock %}

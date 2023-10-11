@@ -1,8 +1,7 @@
 from boto3.dynamodb.conditions import Key, Attr
 from uuid import uuid4
 from flask import Blueprint, flash, render_template, redirect, url_for, request, session
-from botocore.exceptions import ClientError
-from boto3.dynamodb.types import TypeDeserializer
+
 import app.key_config as keys
 import boto3
 import logging

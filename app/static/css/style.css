@@ -1,4 +1,5 @@
 /* ---------------- Styling for sign in page ---------------- */
+
 /* CSS for the divider */
 .divider {
     display: flex;
@@ -99,22 +100,42 @@ h1 {
 }
 
 /* ---------------- Styling modal ---------------- */
-#signInModal .modal-dialog {
+/* Specific styling for the signInModal */
+.signInModal .modal-dialog {
     width: 400px;
 }
 
-.modal.show {
+.signInModal.modal.show {
     display: flex !important;
     justify-content: center;
     align-items: center;
 }
 
-.modal-backdrop {
+.signInModal .modal-backdrop {
     opacity: 0.05 !important;
-
 }
 
-.modal-backdrop.show {
+.signInModal .modal-backdrop.show {
+    opacity: 0.05 !important;
+    pointer-events: none;
+}
+
+/* ---------------- Edit modal ---------------- */
+.editModal .modal-dialog {
+    width: 700px;
+}
+
+.editModal.modal.show {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.editModal .modal-backdrop {
+    opacity: 0.05 !important;
+}
+
+.editModal .modal-backdrop.show {
     opacity: 0.05 !important;
     pointer-events: none;
 }

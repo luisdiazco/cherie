@@ -39,37 +39,55 @@
                             <select class="form-control" id="category" name="category">
                                 <option value="tops">Tops</option>
                                 <option value="bottoms">Bottoms</option>
-                                <!-- ... other options ... -->
+                                <option value="coats_and_jackets">Coats and Jackets</option>
+                                <option value="jumpsuits_and_rompers">Jumpsuits and Rompers</option>
+                                <option value="suits">Suits</option>
+                                <option value="footwear">Footwear</option>
+                                <option value="accessories">Accessories</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="condition">Condition:</label>
                             <select class="form-control" id="condition" name="condition">
-                                <option value="brand_new">Brand New</option>
-                                <!-- ... other options ... -->
+                                <option value="Brand New">Brand New</option>
+                                <option value="Like New">Like New</option>
+                                <option value="Used - Excellent">Used - Excellent</option>
+                                <option value="Used - Good">Used - Good</option>
+                                <option value="Used - Fair">Used - Fair</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="size">Size:</label>
                             <select class="form-control" id="size" name="size">
-                                <option value="xxl">XXL</option>
-                                <!-- ... other options ... -->
+                                <option value="XXL">XXL</option>
+                                <option value="XL">XL</option>
+                                <option value="L">L</option>
+                                <option value="M">M</option>
+                                <option value="S">S</option>
+                                <option value="XS">XS</option>
                             </select>
                         </div>
 
+
                         <!-- Shipping Section -->
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="free_shipping" name="free_shipping">
-                            <label class="form-check-label" for="free_shipping">Free Shipping</label>
+                        <div class="form-group">
+                            <label class="form-check-label" for="free_shipping">Free Shipping:</label>
+                            <input type="checkbox" class="form-check-input ml-2" id="free_shipping"
+                                name="free_shipping">
                         </div>
 
                         <!-- Item Price Section -->
                         <div class="form-group">
                             <label for="price">Item Price (in US$):</label>
-                            <input type="number" class="form-control" id="price" name="price"
-                                placeholder="Enter price in US$">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" class="form-control" id="price" name="price"
+                                    placeholder="Enter price in US$">
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block">List Item</button>
