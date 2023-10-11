@@ -1,10 +1,10 @@
-Certainly, here's your README content formatted as a Markdown file:
-
 ```markdown
 # Cherie
 
 ## Description
-Cherie is a reselling store web application developed as a Zappos take-home project. This project focuses on user authentication (using static user/password for basic authentication), Bootstrap CSS styling, and pagination for lists with more than 10 rows.
+Cherie is a reselling store web application developed as a Zappos take-home project.
+This project focuses on user authentication (using static user/password for basic authentication),
+Bootstrap CSS styling, and pagination for lists with more than 10 rows.
 
 ## Table of Contents
 - [Features](#features)
