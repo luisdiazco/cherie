@@ -11,8 +11,6 @@ Bootstrap CSS styling, and pagination for lists with more than 10 rows.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 - User authentication with basic static credentials.
