@@ -20,7 +20,7 @@ Cherie is a reselling store web application developed as a Zappos take-home proj
 1. Clone this repository to your local machine using Git:
    ```bash
    git clone <repository_url>
-
+```
 Create a virtual environment and activate it:
 python -m venv venv
 source venv/bin/activate  # On Windows, use venv\Scripts\activate
