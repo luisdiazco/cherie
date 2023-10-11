@@ -1,7 +1,7 @@
 from boto3.dynamodb.conditions import Key, Attr
 from botocore.exceptions import ClientError
 from uuid import uuid4
-from flask import Blueprint, flash, render_template, redirect, url_for, request, session
+from flask import Blueprint, flash, render_template, redirect, url_for, request, session, jsonify
 import app.key_config as keys
 import boto3
 import logging
@@ -69,7 +69,8 @@ def create_listing():
                 }
             )
             flash('Item listed successfully!', 'success')
-            return redirect(url_for('web.home', username=session['username']))
+            products = get_user_products(session['username'])
+            return render_template("pages/listings.html", username=session['username'], products=products)
         except ClientError as e:
             logging.error(e)
             flash('Error listing item. Please try again later.', 'error')
@@ -135,6 +136,29 @@ def update_listing(product_id):
         print(f"Error: {e}")
         flash('Error updating listing. Please try again later.', 'error')
         return redirect(url_for('web.listings', username=session['username']))
+
+# Create a route to delete a listing
+
+
+@home_bp.route('/delete_listing/<string:product_id>', methods=['POST'])
+def delete_listing(product_id):
+    try:
+        # Delete the listing from DynamoDB
+        table = dynamodb.Table('products')
+        response = table.delete_item(
+            Key={'product_id': product_id}
+        )
+
+        # Check if the delete request was successful
+        if response.get('ResponseMetadata', {}).get('HTTPStatusCode') == 200:
+            return jsonify({'success': True})
+        else:
+            return jsonify({'success': False, 'message': 'Error deleting listing'})
+
+    except ClientError as e:
+        return jsonify({'success': False, 'message': 'Error deleting listing'})
+
+    return jsonify({'success': False, 'message': 'Unknown error'})
 
 
 @home_bp.route('/about')

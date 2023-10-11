@@ -10,56 +10,23 @@
         <ul class="nav-links">
             <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
 
+
+
+            <!-- Listings -->
+            <li><a href="{{ url_for('web.listings', username=session['username']) }}">Listings</a></li>
+
+
             <!-- User's dropdown with their username -->
             <li>
-                <a href="#" class="desktop-item">Username</a>
+                <a href="#" class="desktop-item">Profile</a>
                 <input type="checkbox" id="showUser">
                 <label for="showUser" class="mobile-item">Username</label>
                 <ul class="drop-menu">
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Account</a></li>
                     <li><a href="#">Logout</a></li>
                 </ul>
             </li>
 
-            <!-- Movies Dropdown -->
-            <li>
-                <a href="#" class="desktop-item">Movies</a>
-                <input type="checkbox" id="showMovies">
-                <label for="showMovies" class="mobile-item">Movies</label>
-                <ul class="drop-menu">
-                    <li><a href="#">Popular</a></li>
-                    <li><a href="#">Now Playing</a></li>
-                    <li><a href="#">Upcoming</a></li>
-                    <li><a href="#">Top Rated</a></li>
-                </ul>
-            </li>
-
-            <!-- TV Shows Dropdown -->
-            <li>
-                <a href="#" class="desktop-item">TV Shows</a>
-                <input type="checkbox" id="showTV">
-                <label for="showTV" class="mobile-item">TV Shows</label>
-                <ul class="drop-menu">
-                    <li><a href="#">Popular</a></li>
-                    <li><a href="#">Airing Today</a></li>
-                    <li><a href="#">On TV</a></li>
-                    <li><a href="#">Top Rated</a></li>
-                </ul>
-            </li>
-
-            <!-- Members link -->
-            <li><a href="#">Members</a></li>
-
-            <!-- Search Box -->
-            <li>
-                <input type="checkbox" id="showSearch">
-                <label for="showSearch" class="btn search-btn"><i class="fas fa-search"></i></label>
-                <div class="search-box">
-                    <input type="text" placeholder="Search...">
-                    <label for="showSearch" class="btn close-search"><i class="fas fa-times"></i></label>
-                </div>
-            </li>
         </ul>
         <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
     </div>

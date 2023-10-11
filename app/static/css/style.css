@@ -39,7 +39,7 @@
 /* Styles for the hero header */
 main {
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh);
     background-color: #1A253A;
     background-image: url(../../static/img/hero.jpg);
     background-size: cover;
