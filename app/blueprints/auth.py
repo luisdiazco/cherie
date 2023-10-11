@@ -1,6 +1,6 @@
 from boto3.dynamodb.conditions import Key, Attr
 from uuid import uuid4
-from flask import Blueprint, flash, render_template, redirect, url_for, request
+from flask import Blueprint, flash, render_template, redirect, url_for, request, session
 from botocore.exceptions import ClientError
 from boto3.dynamodb.types import TypeDeserializer
 import app.key_config as keys
@@ -102,6 +102,9 @@ def authentication():
 
             # Verify the password
             if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
+                # Store user info in session
+                session['username'] = user['username']
+                session['email'] = user['email']
                 # Redirect to the user's home page with their username
                 return redirect(url_for('web.home', username=user['username']))
 

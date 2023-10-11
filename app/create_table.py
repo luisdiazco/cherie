@@ -10,18 +10,25 @@ dynamodb = boto3.resource('dynamodb',
                           )
 
 # Create DynamoDB table
-table = dynamodb.create_table(
-    TableName='users',
+dynamodb = boto3.resource('dynamodb',
+                          region_name=keys.AWS_DEFAULT_REGION,
+                          aws_access_key_id=keys.AWS_ACCESS_KEY_ID,
+                          aws_secret_access_key=keys.AWS_SECRET_ACCESS_KEY,
+                          )
+
+# Create DynamoDB table for products
+products_table = dynamodb.create_table(
+    TableName='products',
     KeySchema=[
         {
-              'AttributeName': 'username',  # Use 'username' as the primary key
-            'KeyType': 'HASH'  # Partition key
+            'AttributeName': 'product_id',
+            'KeyType': 'HASH'
         }
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'username',  # Define 'username' as an attribute
-            'AttributeType': 'S'  # 'S' denotes a String data type
+            'AttributeName': 'product_id',
+            'AttributeType': 'S'
         }
     ],
     ProvisionedThroughput={
@@ -30,8 +37,8 @@ table = dynamodb.create_table(
     }
 )
 
-# Wait until table exists
-table.meta.client.get_waiter('table_exists').wait(TableName='users')
+# Wait until the products table exists
+products_table.meta.client.get_waiter(
+    'table_exists').wait(TableName='products')
 
-
-print(table.item_count)
+print(products_table.item_count)

@@ -3,6 +3,52 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>Welcome, {{ username }}!</h1>
+<main>
+    <div class="main">
+        <h1>Welcome, {{ username }}</h1>
+
+        {% if has_listings %}
+        <a href="{{ url_for('web.listings', username=username) }}" class="btn">My Listings</a>
+        {% else %}
+        <a href="{{ url_for('web.create_listing') }}" class="btn">Create New Listings</a>
+
+        {% endif %}
+    </div>
+
+    <!-- Listing Creation Modal -->
+    <div id="listingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Create a New Listing</h2>
+
+            <form action="{{ url_for('web.create_listing', username=username) }}" method="post">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title">
+
+                <!-- ... other form fields ... -->
+
+                <input type="submit" value="Create">
+            </form>
+        </div>
+    </div>
+</main>
+<script>
+    // Modal Script
+    var modal = document.getElementById("listingModal");
+
+    function openModal() {
+        modal.style.display = "block";
+    }
+
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
 
 {% endblock %}

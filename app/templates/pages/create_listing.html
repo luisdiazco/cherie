@@ -1,0 +1,87 @@
+{% extends "layout/index.html" %}
+
+{% block title %}Create Listing{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Company Logo (Clickable) -->
+    <div class="text-center" id="company-logo">
+        <a href="{{ url_for('auth.login') }}">
+            <img src="{{ url_for('static', filename='img/cherie-logo-alt.png') }}" alt="Cherie Logo" class="mb-4">
+        </a>
+    </div>
+
+    <!-- List an Item Box -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">List an Item</h5>
+                    <div class="custom-divider"></div>
+                    <form action="{{ url_for('web.create_listing', username=username) }}" method="post"
+                        enctype="multipart/form-data">
+                        <!-- Photos Upload Section -->
+                        <div class="form-group">
+                            <label for="photos">Upload Photos (Up to 8):</label>
+                            <input type="file" class="form-control" id="photos" name="photos" multiple accept="image/*"
+                                max="8">
+                        </div>
+
+                        <!-- Description Section -->
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+                        </div>
+
+                        <!-- Info Section -->
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <select class="form-control" id="category" name="category">
+                                <option value="tops">Tops</option>
+                                <option value="bottoms">Bottoms</option>
+                                <!-- ... other options ... -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="condition">Condition:</label>
+                            <select class="form-control" id="condition" name="condition">
+                                <option value="brand_new">Brand New</option>
+                                <!-- ... other options ... -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="size">Size:</label>
+                            <select class="form-control" id="size" name="size">
+                                <option value="xxl">XXL</option>
+                                <!-- ... other options ... -->
+                            </select>
+                        </div>
+
+                        <!-- Shipping Section -->
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="free_shipping" name="free_shipping">
+                            <label class="form-check-label" for="free_shipping">Free Shipping</label>
+                        </div>
+
+                        <!-- Item Price Section -->
+                        <div class="form-group">
+                            <label for="price">Item Price (in US$):</label>
+                            <input type="number" class="form-control" id="price" name="price"
+                                placeholder="Enter price in US$">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">List Item</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 text-center">
+        <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Customer Service</a>
+    </footer>
+</div>
+{% endblock %}
