@@ -55,6 +55,5 @@ Cherie is a reselling store web application developed as a Zappos take-home proj
    SECRET_KEY="<SECRET_KEY>"
    ```
 
-## Contributing
-If you would like to contribute to this project, please follow the [Contributor Covenant](CONTRIBUTING.md) guidelines.
 
+```
