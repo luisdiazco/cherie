@@ -22,6 +22,13 @@ def home(username):
     return render_template("pages/home.html", username=username, has_listings=user_has_listings)
 
 
+@home_bp.route('/logout')
+def logout():
+    session.pop('username', None)  # Remove the user's session data
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('auth.login'))
+
+
 @home_bp.route('/create_listing', methods=['GET', 'POST'])
 def create_listing():
     if request.method == 'POST':

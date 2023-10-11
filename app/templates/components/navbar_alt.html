@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="../../static/css/navbar-style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-<nav>
+<nav id="header">
     <div class="wrapper">
         <div class="logo"><a href="{{ url_for('web.home', username=session['username']) }}"><img id="navbar-logo"
                     src="../../static/img/cherie-logo.png" alt="Cherie Icon"></a></div>
@@ -10,11 +10,11 @@
         <ul class="nav-links">
             <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
 
-
-
             <!-- Listings -->
             <li><a href="{{ url_for('web.listings', username=session['username']) }}">Listings</a></li>
 
+            <!-- About -->
+            <li><a href="#">About</a></li>
 
             <!-- User's dropdown with their username -->
             <li>
@@ -23,7 +23,7 @@
                 <label for="showUser" class="mobile-item">Username</label>
                 <ul class="drop-menu">
                     <li><a href="#">Account</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="{{ url_for('web.logout') }}">Logout</a></li>
                 </ul>
             </li>
 
@@ -31,5 +31,3 @@
         <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
     </div>
 </nav>
-
-{% include 'components/signin_modal.html' %}

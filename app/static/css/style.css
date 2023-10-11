@@ -1,4 +1,8 @@
 /* ---------------- Styling for sign in page ---------------- */
+body {
+    margin: 0;
+    padding: 0;
+}
 
 /* CSS for the divider */
 .divider {
@@ -39,8 +43,8 @@
 /* Styles for the hero header */
 main {
     width: 100%;
-    height: calc(100vh);
-    background-color: #1A253A;
+    height: calc(100vh - 30px);
+    background-color: #fff;
     background-image: url(../../static/img/hero.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -50,6 +54,8 @@ main {
     justify-content: center;
     align-items: center;
     position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 .main h1 {
@@ -61,17 +67,18 @@ main {
 
 .btn {
     background-color: #fff;
-    color: #1A253A;
+    color: #3A3B3C;
     padding: 10px 25px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 500;
     transition: background-color 0.3s;
 }
 
 .btn:hover {
-    background-color: #1A253A;
+    background-color: #3A3B3C;
     color: #fff;
 }
 
@@ -79,45 +86,19 @@ h1 {
     margin: 0;
 }
 
-#imageCarousel {
-    height: 100vh;
-    width: 100%;
-}
-
-/* CSS for the carousel */
-.carousel {
-    width: 100%;
-    max-height: 525px;
-    margin: 0 auto;
-}
-
-/* CSS for the carousel images */
-.carousel-inner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-}
-
-/* ---------------- Styling modal ---------------- */
-/* Specific styling for the signInModal */
-.signInModal .modal-dialog {
-    width: 400px;
-}
-
-.signInModal.modal.show {
-    display: flex !important;
-    justify-content: center;
+.content-container {
+    display: flex;
     align-items: center;
 }
 
-.signInModal .modal-backdrop {
-    opacity: 0.05 !important;
+.left-side {
+    flex: 1;
+    padding: 100px;
 }
 
-.signInModal .modal-backdrop.show {
-    opacity: 0.05 !important;
-    pointer-events: none;
+.right-side {
+    flex: 1;
+    padding: 20px;
 }
 
 /* ---------------- Edit modal ---------------- */
@@ -145,9 +126,8 @@ h1 {
     opacity: 0;
     transition: opacity 0.5s;
     position: fixed;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 90%;
+    left: 80%;
     background-color: #e74c3c;
     color: white;
     padding: 15px;
@@ -159,4 +139,57 @@ h1 {
     height: 1px;
     background-color: #ddd;
     margin: 10px 0;
+}
+
+/* Styling for the pagination */
+.pagination .page-link {
+    background-color: #fff;
+    border-color: #3A3B3C;
+    color: #3A3B3C;
+    /* Set the default color for page links */
+}
+
+.pagination .page-link:hover {
+    background-color: #3A3B3C;
+    color: #ffff;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #3A3B3C;
+    /* Darker background for the current page */
+    border-color: #3A3B3C;
+    /* Border color for the current page */
+    color: #fff;
+    /* White text color for the current page */
+}
+
+/* CSS for the footer */
+footer {
+    background-color: #3A3B3C;
+    color: #fff;
+    padding: 40px;
+    text-align: center;
+}
+
+/* CSS for footer links */
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+/* CSS for footer links on hover */
+footer a:hover {
+    color: #c9c6c2;
+}
+
+/* Apply top margin or padding to the content section to create space beneath the navbar */
+.content-section {
+    margin-top: 200px;
+}
+
+/* Remove the outline when an element is in focus */
+*:focus {
+    outline: none;
 }

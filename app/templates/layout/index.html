@@ -30,12 +30,7 @@
 </head>
 
 
-
-
-
 <body>
-    {% include 'layout/navbar.html' %}
-
     {% include 'components/signin_modal.html' %}
     {% block content %}
     <!-- Content of other pages will be inserted here -->
@@ -43,11 +38,6 @@
 
 </body>
 
-
-
-<footer>
-    <!--  footer content -->
-</footer>
-
+{% include 'components/footer.html' %}
 
 </html>

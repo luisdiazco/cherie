@@ -1,12 +1,12 @@
 {% extends "layout/index.html" %}
+{% include 'components/navbar_alt.html' %}
 
 {% block title %}Your Listings{% endblock %}
-
 {% block content %}
 <div class="container mt-5">
     <!-- Company Logo (Clickable) -->
     <div class="text-center" id="company-logo">
-        <a href="{{ url_for('auth.login') }}">
+        <a href="{{ url_for('web.home', username=session['username']) }}">
             <img src="{{ url_for('static', filename='img/cherie-logo-alt.png') }}" alt="Cherie Logo" class="mb-4">
         </a>
     </div>
@@ -15,7 +15,6 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <ul class="pagination" id="pagination">
-                <!-- Pagination links will be added here using JavaScript -->
             </ul>
         </div>
     </div>
@@ -32,27 +31,23 @@
                         <th>Size</th>
                         <th>Free Shipping</th>
                         <th>Price (US$)</th>
-                        <th>Action</th> <!-- Add a new column for the action button -->
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- This is where the paginated products will be displayed -->
                 </tbody>
             </table>
         </div>
     </div>
 
     <!-- Create Listing Button -->
-    <div class="row justify-content-center mt-4">
+    <div class="row justify-content-center mt-4 mb-5">
         <div class="col-md-6 text-center">
             <a href="{{ url_for('web.create_listing') }}" class="btn btn-primary btn-lg">Create Listing</a>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="mt-5 text-center">
-        <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Customer Service</a>
-    </footer>
+
 </div>
 <!-- Modal for editing and deleting listing -->
 {% for product in products %}
@@ -190,7 +185,6 @@
             $("#product-list-table tbody").append(row);
         });
 
-
         // Update pagination controls
         updatePagination();
     }
@@ -229,7 +223,6 @@
         // Add an event listener for the "Delete" button click
         $(".delete-button").on("click", function () {
             var productId = $(this).data("product-id");
-            console.log("THIS IS THE PRODUCT ID: ", productId);
 
             // Send an AJAX request to delete the product
             $.ajax({

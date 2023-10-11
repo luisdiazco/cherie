@@ -1,19 +1,19 @@
 {% extends "layout/index.html" %}
 
 {% block title %}Create Listing{% endblock %}
-
+{% include 'components/navbar_alt.html' %}
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5 content-section">
     <!-- Company Logo (Clickable) -->
     <div class="text-center" id="company-logo">
-        <a href="{{ url_for('auth.login') }}">
+        <a href="{{ url_for('web.home', username=session['username']) }}">
             <img src="{{ url_for('static', filename='img/cherie-logo-alt.png') }}" alt="Cherie Logo" class="mb-4">
         </a>
     </div>
 
     <!-- List an Item Box -->
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-5">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center">List an Item</h5>
@@ -96,9 +96,5 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="mt-5 text-center">
-        <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Customer Service</a>
-    </footer>
 </div>
 {% endblock %}

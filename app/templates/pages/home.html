@@ -1,7 +1,8 @@
 {% extends "layout/index.html" %}
 
-{% block title %}Home{% endblock %}
+{% include 'components/navbar.html' %}
 
+{% block title %}Home{% endblock %}
 {% block content %}
 <main>
     <div class="main">
@@ -16,7 +17,6 @@
                 {% endif %}
             </div>
             <div class="right-side">
-                <!-- Image here -->
                 <img src="../../static/img/cherry.png" alt="Image" style="width:500px;">
             </div>
 
@@ -25,46 +25,19 @@
 </main>
 
 <script>
-    // Modal Script
-    var modal = document.getElementById("listingModal");
+    document.addEventListener("DOMContentLoaded", function () {
+        const nav = document.querySelector("nav");
+        const header = document.querySelector("#header");
 
-    function openModal() {
-        modal.style.display = "block";
-    }
-
-    function closeModal() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            closeModal();
-        }
-    }
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > header.offsetHeight) {
+                nav.style.background = "#242526"; // Change to your desired solid background color
+            } else {
+                nav.style.background = "transparent";
+            }
+        });
+    });
 </script>
 
-<style>
-    .content-container {
-        display: flex;
-        align-items: center;
-        /* Vertically center content */
-    }
-
-    .left-side {
-        flex: 1;
-        /* Take up available space */
-        padding: 100px;
-        /* Adjust as needed */
-    }
-
-    .right-side {
-        flex: 1;
-        /* Take up available space */
-        padding: 20px;
-        /* Adjust as needed */
-    }
-
-    /* Add any additional styling you need */
-</style>
 
 {% endblock %}
