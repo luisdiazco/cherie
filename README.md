@@ -1,4 +1,4 @@
-```markdown
+
 # Cherie
 
 ## Description
@@ -56,4 +56,3 @@ Bootstrap CSS styling, and pagination for lists with more than 10 rows.
    ```
 
 
-```
