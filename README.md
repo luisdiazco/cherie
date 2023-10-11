@@ -1,3 +1,6 @@
+Certainly, here's your README content formatted as a Markdown file:
+
+```markdown
 # Cherie
 
 ## Description
@@ -20,28 +23,38 @@ Cherie is a reselling store web application developed as a Zappos take-home proj
 1. Clone this repository to your local machine using Git:
    ```bash
    git clone <repository_url>
-```
-Create a virtual environment and activate it:
-python -m venv venv
-source venv/bin/activate  # On Windows, use venv\Scripts\activate
+   ```
 
-Install the required dependencies:
-  ```bash
-      pip install -r requirements.txt
+2. Create a virtual environment and activate it:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows, use venv\Scripts\activate
+   ```
 
-Usage
-Configure your environment variables
+3. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Run the Flask application:
-  ```bash
-      python run.py
+## Usage
+1. Configure your environment variables.
 
-Configuration
-Create a .env file in the root directory.
+2. Run the Flask application:
+   ```bash
+   python run.py
+   ```
 
-Add the following environment variables to the .env file:
-  ```bash
+## Configuration
+1. Create a .env file in the root directory.
+
+2. Add the following environment variables to the .env file:
+   ```bash
    AWS_ACCESS_KEY_ID="<AWS_ACCESS_KEY_ID>"
    AWS_SECRET_ACCESS_KEY="<AWS_SECRET_ACCESS_KEY>"
    AWS_DEFAULT_REGION="<AWS_DEFAULT_REGION>"
    SECRET_KEY="<SECRET_KEY>"
+   ```
+
+## Contributing
+If you would like to contribute to this project, please follow the [Contributor Covenant](CONTRIBUTING.md) guidelines.
+
