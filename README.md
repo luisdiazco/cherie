@@ -26,19 +26,22 @@ python -m venv venv
 source venv/bin/activate  # On Windows, use venv\Scripts\activate
 
 Install the required dependencies:
-pip install -r requirements.txt
+  ```bash
+      pip install -r requirements.txt
+
 Usage
-Configure your environment variables (if needed).
+Configure your environment variables
 
 Run the Flask application:
-python run.py
+  ```bash
+      python run.py
 
 Configuration
 Create a .env file in the root directory.
 
 Add the following environment variables to the .env file:
-
-AWS_ACCESS_KEY_ID="<AWS_ACCESS_KEY_ID>"
-AWS_SECRET_ACCESS_KEY="<AWS_SECRET_ACCESS_KEY>"
-AWS_DEFAULT_REGION="<AWS_DEFAULT_REGION>"
-SECRET_KEY="<SECRET_KEY>"
+  ```bash
+   AWS_ACCESS_KEY_ID="<AWS_ACCESS_KEY_ID>"
+   AWS_SECRET_ACCESS_KEY="<AWS_SECRET_ACCESS_KEY>"
+   AWS_DEFAULT_REGION="<AWS_DEFAULT_REGION>"
+   SECRET_KEY="<SECRET_KEY>"
