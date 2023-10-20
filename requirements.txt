@@ -1,5 +1,7 @@
 boto3==1.18.2
 Flask==2.1.0
+Werkzeug==2.0.1
 botocore==1.21.2
 bcrypt==3.2.1
 uuid==1.30
+python-dotenv>=0.15.0

@@ -5,10 +5,10 @@ services:
     build:
       context: ./
       dockerfile: release.Dockerfile
-    container_name: myapi-template
+    container_name: my-template
     restart: always
     env_file:
-      - app/.env
+      - .env
     volumes:
       - "./app:/app"
     ports:
