@@ -2,7 +2,7 @@
 # Cherie
 
 ## Description
-Cherie is a reselling store web application developed as a Zappos take-home project.
+Cherie is a reselling store web application developed on implementing AWS services (EC2, DynamoDB, and S3) as well as CRUD operations.
 This project focuses on user authentication (using static user/password for basic authentication),
 Bootstrap CSS styling, and pagination for lists with more than 10 rows.
 
